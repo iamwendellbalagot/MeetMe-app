@@ -23,15 +23,16 @@ app.get('/', (req, res) => {
 
 app.get('/:room', (req, res) => {
     res.render('room', {roomId: req.params.room});
-})
+});
 
 io.on('connection', socket => {
     socket.on('join-room', (roomId, userId)=>{
         socket.join(roomId);
         socket.to(roomId).broadcast.emit('user-connected', userId);
 
-        socket.on('message', message => {
-            io.to(roomId).emit('createMessage', message);
+        socket.on('message', (message, username) => {
+            let msgTime = new Date().toLocaleTimeString();
+            io.to(roomId).emit('createMessage', message, msgTime, username);
         })
     });
 });

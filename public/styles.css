@@ -90,10 +90,25 @@ video {
     margin: 10px 0 0 10px;
     width: 300px;
     list-style-type: none;
-    color: #ccc;
+    color: #fff;
     float: left;
     display: block;
     overflow-wrap: break-word;
+}
+
+.msg__time {
+    color: #ccc;
+    font-size: 9px;
+    float: right;
+    margin-right: 15px;
+}
+
+.msg__userId {
+    position: relative;
+    color: rgb(41, 40, 40);
+    font-weight: 700;
+    margin: 0;
+    padding: 0;
 }
 
 .chat__form {

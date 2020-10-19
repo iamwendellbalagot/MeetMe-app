@@ -6,13 +6,18 @@ var peer =  new Peer(undefined, {
     port: '3030'
 });
 
+const username = 'username';
+
 // const myVideo = document.querySelector('#videoElement');
+let  myVideoStream;
 const myVideo = document.createElement('video');
+myVideo.muted = true;
 const videoGrid = document.getElementById('video-grid')
 
 //Connect to camera and audio
-navigator.mediaDevices.getUserMedia({ video: true })
+navigator.mediaDevices.getUserMedia({ video: true, audio: true })
     .then(function (stream) {
+        myVideoStream = stream;
         addVideoStream(myVideo, stream);
 
         peer.on('call', call =>{
@@ -26,11 +31,52 @@ navigator.mediaDevices.getUserMedia({ video: true })
         });
 });
 
+$('.mic__icon').click(() =>{
+    let mic_status = myVideoStream.getAudioTracks()[0].enabled;
+    
+    if(mic_status){
+        myVideoStream.getAudioTracks()[0].enabled = false;
+        icon_element = `
+            <i class="fas fa-microphone-alt-slash"></i>
+            <span>Mic is off</span>
+        `
+        document.querySelector('.mic__icon').innerHTML = icon_element;
+    }
+    else{
+        myVideoStream.getAudioTracks()[0].enabled = true;
+        icon_element = `
+            <i class="fas fa-microphone-alt"></i>
+            <span>Mic is on</span>
+        `
+        document.querySelector('.mic__icon').innerHTML = icon_element;
+    }
+});
+
+$('.camera__icon').click(() =>{
+    let mic_status = myVideoStream.getVideoTracks()[0].enabled;
+    
+    if(mic_status){
+        myVideoStream.getVideoTracks()[0].enabled = false;
+        icon_element = `
+            <i class="fas fa-video-slash"></i>
+            <span>Cam is off</span>
+        `
+        document.querySelector('.camera__icon').innerHTML = icon_element;
+    }
+    else{
+        myVideoStream.getVideoTracks()[0].enabled = true;
+        icon_element = `
+            <i class="fas fa-video"></i>
+            <span>Cam is on</span>
+        `
+        document.querySelector('.camera__icon').innerHTML = icon_element;
+    }
+});
 
 let msg = $('input');
 $('html').keydown(key => {
     if( key.which === 13 && msg.val().length !== 0 ){
-        socket.emit('message', msg.val())
+        socket.emit('message', msg.val(), username)
         msg.val('');
     }
     else{
@@ -38,14 +84,23 @@ $('html').keydown(key => {
     }
 })
 $('#send').click(() => {
-    socket.emit('message', msg.val());
-    msg.val('');
+    if(msg.val().length !== 0){
+        socket.emit('message', msg.val());
+        msg.val('');
+    }else{
+        return;
+    };
+    
 })
 
-socket.on('createMessage', message => {
+socket.on('createMessage', (message, msgTime, username_server) => {
     $('.message__container').append(
-        `   <div class="text__box">
-                ${message}
+        `   
+            <div class="text__box">
+                <span class="msg__userId">user: ${username_server}</span><br>
+                ${message}<br>
+                <span class="msg__time">${msgTime}</span>
+                
             </div>
         `
     );
