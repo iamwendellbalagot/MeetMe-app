@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="styles.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <script src="/socket.io/socket.io.js"></script>
+    <script  src="https://unpkg.com/peerjs@1.3.1/dist/peerjs.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+    <script>
+        const ROOM_ID = "<%= roomId %>";
+    </script>
+    
+    <title>Zoom Clone</title>
+</head>
+<body>
+    <div class="">
+        <div class="row">
+
+          <div class="col col-md-1 menu__panel">
+            <div class="row icon__menu">
+                <i class="fas fa-microphone-alt"></i>
+                <span>Micropone</span>
+            </div>
+            <div class="row icon__menu">
+                <i class="fas fa-video"></i>
+                <span>Camera</span>
+            </div>
+            <div class="row icon__menu">
+                <i class="fas fa-users"></i>
+                <span>Participants</span>
+            </div>
+            <div class="row icon__menu">
+                <i class="fas fa-comment-alt"></i>
+                <span>Chat</span>
+            </div>
+            <div class="row icon__menu">
+                <i class="fas fa-sign-out-alt"></i>
+                <span>Leave</span>
+            </div>
+          </div>
+
+          <div class="col col-md-8 main__panel">
+            <div id ="video-grid"></div>
+          </div>
+
+          <div class="col col-md-3 chat__panel">
+            <div class="row chat__header"><h4>Messages</h4></div>
+            <div class="row chat__body">
+                <div class="message__container">
+                </div>
+            </div>
+            <div class="row-10 chat__form">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Enter a message..." aria-label="Recipient's username" aria-describedby="button-addon2">
+                    <div class="input-group-append">
+                      <button id='send' class="btn btn-outline-secondary" type="button" id="button-addon2">Send</button>
+                    </div>
+                </div>
+            </div>
+          </div>
+
+        </div>
+    </div>
+
+
+    
+    <script src="script.js"></script>
+</body>
+</html>
+
