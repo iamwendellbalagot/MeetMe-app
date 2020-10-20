@@ -6,8 +6,6 @@ var peer =  new Peer(undefined, {
     port: '3030'
 });
 
-const username = 'username';
-
 // const myVideo = document.querySelector('#videoElement');
 let  myVideoStream;
 const myVideo = document.createElement('video');
@@ -76,7 +74,7 @@ $('.camera__icon').click(() =>{
 let msg = $('input');
 $('html').keydown(key => {
     if( key.which === 13 && msg.val().length !== 0 ){
-        socket.emit('message', msg.val(), username)
+        socket.emit('message', msg.val(), USER_ID)
         msg.val('');
     }
     else{
@@ -85,7 +83,7 @@ $('html').keydown(key => {
 })
 $('#send').click(() => {
     if(msg.val().length !== 0){
-        socket.emit('message', msg.val());
+        socket.emit('message', msg.val(), USER_ID);
         msg.val('');
     }else{
         return;

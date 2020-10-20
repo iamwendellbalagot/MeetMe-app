@@ -15,7 +15,6 @@ const authenticate = require('./authenticate');
 const User = require('./models/user__model');
 
 
-
 const port = 3030;
 const hostname = 'localhost';
 const { v4: uuidV4 } = require('uuid');
@@ -71,9 +70,13 @@ app.get('/users/login', (req, res) => {
     res.render('home')
 });
 
+app.get('/users/signup', (req, res) =>{
+    res.render('signup')
+});
+
 app.get('/:room', (req, res) => {
     if(req.signedCookies.user){
-        res.render('room', {roomId: req.params.room});
+        res.render('room', {roomId: req.params.room, username:req.signedCookies.user});
     }else{
         res.redirect('/users/login');
     }
@@ -85,7 +88,7 @@ app.get('/users/logout', (req, res) =>{
         res.redirect('/');
     }else {
         res.statusCode = 403;
-        res.end('You are not logged in.');
+        res.redirect('/');
     }
 });
 
@@ -109,7 +112,7 @@ app.post('/users/signup', (req, res, next) => {
     });
   });
   
-app.post('/users/login', passport.authenticate('local'), (req, res) => {
+app.post('/users/login', passport.authenticate('local',{failureRedirect:'/'}), (req, res) => {
     res.statusCode = 200;
     res.cookie('user',req.user.username,{signed: true});
     res.setHeader('Content-Type', 'application/json');
@@ -122,7 +125,6 @@ io.on('connection', socket => {
     socket.on('join-room', (roomId, userId)=>{
         socket.join(roomId);
         socket.to(roomId).broadcast.emit('user-connected', userId);
-
         socket.on('message', (message, username) => {
             let msgTime = new Date().toLocaleTimeString();
             io.to(roomId).emit('createMessage', message, msgTime, username);

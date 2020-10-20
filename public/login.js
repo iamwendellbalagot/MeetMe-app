@@ -28,3 +28,7 @@ const submit = () =>{
     document.getElementById('input__username').value = ''
     document.getElementById('input__password').value = ''
 }
+
+const signup = () => {
+    document.location.href = '/users/signup';
+};
