@@ -29,6 +29,15 @@ video {
     align-items: center;
 }
 
+.main__panel p {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    margin-left: 10px;
+    color: rgb(53, 51, 51);
+    font-size: 12px;
+}
+
 
 .menu__panel {
     background-color: #394867;

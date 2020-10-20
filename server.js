@@ -61,13 +61,17 @@ const auth = (req, res, next) => {
 
 
 app.get('/', (req, res) => {
-    res.statusCode = 200;
-    res.redirect(`/${uuidV4()}`);
+    if(req.signedCookies.user){
+        res.statusCode = 200;
+        res.render('home', {username: req.signedCookies.user, roomId:uuidV4()});
+    }else{
+        res.redirect('/users/login');
+    }
     
 })
 
 app.get('/users/login', (req, res) => {
-    res.render('home')
+    res.render('login')
 });
 
 app.get('/users/signup', (req, res) =>{

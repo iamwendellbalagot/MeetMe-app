@@ -3,43 +3,45 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/login.css">
+    <link rel="stylesheet" href="/home.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <script src="/login.js"></script>
-    <title>Log in</title>
+    <script src="/home.js"></script>
+    <script>
+        let ROOM_ID = "<%= roomId %>"
+        
+        console.log(ROOM_ID)
+    </script>
+    <title>MeetMe</title>
 </head>
-<body>
-    <div class="login__container">
-        <div class="navbar navbar-expand-lg navbar-dark bg-dark navbar__login">
-            <div class="navbar-nav">
-                <a class="nav-link link__signup" onclick="signup()">Sign up</a>
-                <a class="nav-link">Developer</a>
+    <body>
+        <div class="login__container">
+            <div class="navbar navbar-expand-lg navbar-dark bg-dark navbar__login">
+                <div class="navbar-nav">
+                    <a class="nav-link link__logout" onclick="logout()">Logout</a>
+                </div>
+            </div>
+            <img src="/home__bg2.jpg" />
+            <div class="row home__block">
+            <div class="col-sm"></div>
+                <div class="col-sm-8 controls__form">
+                    <h2>Welcome, <%= username %>!</h2><br><br>
+                    <div class="form-group">
+                    <button class="btn btn-info btn-lg btn-block" id="create__room" onclick="createRoom()" >Create a meeting room</button>
+                    </div>
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                        <div class="btn btn-dark " id="btnGroupAddon" onclick="joinRoom()">Join</div>
+                        </div>
+                        <input id="input__roomid" type="text" class="form-control" placeholder="Enter the meeting ID" aria-label="Input group example" aria-describedby="btnGroupAddon">
+                    </div>
+                    <div id="login__prompt"></div>
+                </div>
+            <div class="col-sm"></div>
             </div>
         </div>
-        <img src="/login__backgorund.jpg" />
-        <div class="row">
-          <div class="col-sm"></div>
-          <div class="col-sm login__form">
-            <form onsubmit="return false">
-                <h4>SIGN IN</h4><br>
-                <div class="form-group">
-                  <label for="input__username">Username</label>
-                  <input type="text" class="form-control" id="input__username" aria-describedby="emailHelp">
-                </div>
-                <div class="form-group">
-                  <label for="input__password">Password</label>
-                  <input type="password" class="form-control" id="input__password">
-                </div>
-                <div type="submit" class="btn btn-secondary" id='submit__login' onclick="submit()">Login</div>
-                <div id="login__prompt"></div>
-            </form>
-          </div>
-          <div class="col-sm"></div>
-        </div>
-    </div>
-</body>
+    </body>
 </html>

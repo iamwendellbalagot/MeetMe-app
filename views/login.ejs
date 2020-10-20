@@ -9,14 +9,14 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <script src="/signup.js"></script>
-    <title>Sign up</title>
+    <script src="/login.js"></script>
+    <title>Log in</title>
 </head>
 <body>
     <div class="login__container">
         <div class="navbar navbar-expand-lg navbar-dark bg-dark navbar__login">
             <div class="navbar-nav">
-                <a class="nav-link link__signup" onclick="login()">Log in</a>
+                <a class="nav-link link__signup" onclick="signup()">Sign up</a>
                 <a class="nav-link" target="_blank" href="https://github.com/iamwendellbalagot">Developer</a>
             </div>
         </div>
@@ -25,18 +25,17 @@
           <div class="col-sm"></div>
           <div class="col-sm login__form">
             <form onsubmit="return false">
-                <h4>SIGN UP NOW</h4><br>
+                <h4>SIGN IN</h4><br>
                 <div class="form-group">
                   <label for="input__username">Username</label>
                   <input type="text" class="form-control" id="input__username" aria-describedby="emailHelp">
-                  <div id='username__prompt'></div>
                 </div>
                 <div class="form-group">
                   <label for="input__password">Password</label>
                   <input type="password" class="form-control" id="input__password">
-                  <div id='password__prompt'></div>
                 </div>
-                <div type="submit" class="btn btn-secondary" id='submit__login' onclick="submit()">Sign up</div>
+                <div type="submit" class="btn btn-secondary" id='submit__login' onclick="submit()">Login</div>
+                <div id="login__prompt"></div>
             </form>
           </div>
           <div class="col-sm"></div>
