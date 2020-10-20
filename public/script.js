@@ -53,9 +53,9 @@ $('.mic__icon').click(() =>{
 });
 
 $('.camera__icon').click(() =>{
-    let mic_status = myVideoStream.getVideoTracks()[0].enabled;
+    let camera_status = myVideoStream.getVideoTracks()[0].enabled;
     
-    if(mic_status){
+    if(camera_status){
         myVideoStream.getVideoTracks()[0].enabled = false;
         icon_element = `
             <i class="fas fa-video-slash"></i>
