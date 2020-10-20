@@ -101,14 +101,20 @@ app.post('/users/signup', (req, res, next) => {
         res.statusCode = 500;
         res.setHeader('Content-Type', 'application/json');
         res.json({err: err});
+        return;
       }
-      else {
-        passport.authenticate('local')(req, res, () => {
-          res.statusCode = 200;
+      user.save((err, user) => {
+        if(err) {
+          res.statusCode = 500;
           res.setHeader('Content-Type', 'application/json');
-          res.json({success: true, status: 'Registration Successful!'});
-        });
-      }
+          res.json({err: err});
+        }
+        else {
+            res.statusCode = 200;
+            res.setHeader('Content-Type', 'application/json');
+            res.json({success: true, status: 'Registration Successful!'});
+        }
+      })
     });
   });
   
