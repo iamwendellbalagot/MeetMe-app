@@ -19,8 +19,14 @@ const submit = () =>{
 
     xhttp.open("POST", "/users/login", true);
     xhttp.onload = () =>{
-        console.log(xhttp.responseURL);
-        document.location.href = xhttp.responseURL;
+        console.log(xhttp.status);
+        if(xhttp.status === 200){
+            document.location.href = '/';
+        }
+        else{
+            let user__prompt= `<small id="emailHelp" class="form-text text-muted">Username and Password doesn't match </small>`
+            document.querySelector('#login__prompt').innerHTML = user__prompt;
+        }
     };
     xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
     xhttp.send(`username=${username}&password=${password}`);

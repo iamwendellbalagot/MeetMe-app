@@ -118,7 +118,7 @@ app.post('/users/signup', (req, res, next) => {
     });
   });
   
-app.post('/users/login', passport.authenticate('local',{failureRedirect:'/'}), (req, res) => {
+app.post('/users/login', passport.authenticate('local'), (req, res) => {
     res.statusCode = 200;
     res.cookie('user',req.user.username,{signed: true});
     res.setHeader('Content-Type', 'application/json');
