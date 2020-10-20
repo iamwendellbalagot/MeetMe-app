@@ -92,6 +92,16 @@ $('#send').click(() => {
     };
     
 })
+$('#leave__meeting').click(() =>{
+    console.log('Leave')
+    xhttp = new XMLHttpRequest()
+    xhttp.open('GET', '/users/logout', true);
+    xhttp.onload = () =>{
+        document.location.href = xhttp.responseURL;
+    };
+    xhttp.setRequestHeader("Content-type", "text/plain");
+    xhttp.send();
+});
 
 socket.on('createMessage', (message, msgTime, username_server) => {
     $('.message__container').append(

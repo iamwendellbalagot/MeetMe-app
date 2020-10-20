@@ -72,13 +72,23 @@ app.get('/users/login', (req, res) => {
 });
 
 app.get('/:room', (req, res) => {
-    console.log(req.signedCookies.user)
     if(req.signedCookies.user){
         res.render('room', {roomId: req.params.room});
     }else{
-        res.end('PLEASE LOGIN')
+        res.redirect('/users/login');
     }
 });
+
+app.get('/users/logout', (req, res) =>{
+    if (req.signedCookies.user){
+        res.clearCookie('user');
+        res.redirect('/');
+    }else {
+        res.statusCode = 403;
+        res.end('You are not logged in.');
+    }
+});
+
 
 
 app.post('/users/signup', (req, res, next) => {
@@ -103,8 +113,9 @@ app.post('/users/login', passport.authenticate('local'), (req, res) => {
     res.statusCode = 200;
     res.cookie('user',req.user.username,{signed: true});
     res.setHeader('Content-Type', 'application/json');
-    res.json({success: true, status: 'You are successfully logged in!', name: req.user.username});
+    res.redirect('/');
 });
+
 
 
 io.on('connection', socket => {
