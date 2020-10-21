@@ -21,7 +21,11 @@ navigator.mediaDevices.getUserMedia({ video: true, audio: true })
         peer.on('call', call =>{
             call.answer(stream);
             const video = document.createElement('video');
-            addVideoStream(video, stream);
+            call.on('stream', flightStream =>{
+                console.log('sending')
+                addVideoStream(video, flightStream);
+            });
+            
         })
 
         socket.on('user-connected', (userId) =>{
