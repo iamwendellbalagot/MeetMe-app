@@ -8,6 +8,7 @@ const peerServer =  ExpressPeerServer(server, {debug: true});
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const mongodb = require('mongodb');
 
 const passport = require('passport');
 const authenticate = require('./authenticate');
@@ -18,8 +19,9 @@ const User = require('./models/user__model');
 const port = 3030;
 const hostname = 'localhost';
 const { v4: uuidV4 } = require('uuid');
+const uri = "mongodb+srv://wendell2215:jellyman22@cluster0.u9tud.mongodb.net/<meetme>?retryWrites=true&w=majority";
 
-mongoose.connect(`mongodb://${hostname}:27017/meetme`, {useNewUrlParser:true, useUnifiedTopology: true});
+mongoose.connect(uri, {useNewUrlParser:true, useUnifiedTopology: true});
 
 const db = mongoose.connection;
 
@@ -144,6 +146,4 @@ io.on('connection', socket => {
 
 
 
-server.listen(process.env.PORT || port, hostname, () =>{
-    console.log('Server is connected in port 3030.')
-});
+server.listen(process.env.PORT || port);
